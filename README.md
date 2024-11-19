@@ -4,4 +4,4 @@
 
 # The Focus
 <p>A noita mod which adds some new spells.<br>
-Currently it's not complete enough to be published on the Steam Workshop.For the same reason, it's not supposed to enable this mod during *actual* noita gameplay.</p>
+Currently it's not complete enough to be published on the Steam Workshop. For the same reason, it's not supposed to enable this mod during *actual* noita gameplay.</p>
