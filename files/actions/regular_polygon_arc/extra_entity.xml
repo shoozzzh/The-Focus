@@ -1,0 +1,8 @@
+<Entity>
+	<VariableStorageComponent _tags="__ACTION_ID__" />
+	<LuaComponent
+		script_source_file="__MOD_ACTION_UTILS__extract_gravity_sign.lua"
+		execute_on_added="1"
+		remove_after_executed="1">
+	</LuaComponent>
+</Entity>

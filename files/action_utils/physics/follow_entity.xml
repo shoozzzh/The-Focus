@@ -1,0 +1,11 @@
+<Entity>
+	<LuaComponent
+		script_source_file="__THIS_FOLDER__follow_entity.lua"
+		execute_every_n_frame="1">
+	</LuaComponent>
+	<LuaComponent
+		script_source_file="__THIS_FOLDER__save_pbody_offset.lua"
+		execute_on_added="1"
+		remove_after_executed="1">
+	</LuaComponent>
+</Entity>

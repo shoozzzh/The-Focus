@@ -1,0 +1,1 @@
+dofile( "__THIS_FOLDER__+projectile_init.lua" )

@@ -1,0 +1,8 @@
+<Entity>
+	<LuaComponent
+		_tags="camera_carrying"
+		_enabled="0"
+		script_source_file="__THIS_FOLDER__carrying_nearby_update.lua"
+		execute_every_n_frame="1">
+	</LuaComponent>
+</Entity>

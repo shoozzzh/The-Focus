@@ -1,0 +1,22 @@
+<Entity name="$projectile_default" >
+	<Base file="__MOD_ACTION_UTILS__movement/base_projectile.xml">
+		<ProjectileComponent
+			speed_min="400"
+			speed_max="400"
+			lifetime="24"
+			knockback_force="6"
+			ragdoll_force_multiplier="0.2">
+			<damage_by_type
+				melee="1.8">
+			</damage_by_type>
+		</ProjectileComponent>
+	</Base>
+	<AudioLoopComponent
+		_tags="spinning_sound"
+		file="materials.bank"
+		event_name="materials/fast_spinning_object"
+		auto_play="1"
+		set_speed_parameter="1"
+		calculate_material_lowpass="0">
+	</AudioLoopComponent>
+</Entity>

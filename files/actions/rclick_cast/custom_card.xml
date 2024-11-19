@@ -1,0 +1,11 @@
+<Entity>
+	<InheritTransformComponent
+		_tags="enabled_in_world,enabled_in_hand"
+		use_root_parent="1">
+	</InheritTransformComponent>
+	<LuaComponent
+		_tags="enabled_in_hand"
+		script_source_file="__THIS_FOLDER__custom_card_update.lua"
+		execute_every_n_frame="1">
+	</LuaComponent>
+</Entity>

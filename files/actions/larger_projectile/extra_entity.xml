@@ -1,0 +1,6 @@
+<Entity>
+	<VariableStorageComponent
+		name="___projectile_sizer"
+		value_float="1.3">
+	</VariableStorageComponent>
+</Entity>

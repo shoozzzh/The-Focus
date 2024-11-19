@@ -1,0 +1,4 @@
+<Entity>
+	<Base file="__MOD_ACTION_UTILS__camera/carrier.xml" />
+	<Base file="__MOD_ACTION_UTILS__camera/carrying_active.xml" />
+</Entity>

@@ -1,0 +1,21 @@
+<Entity>
+	<VariableStorageComponent
+		_tags="camera_carrier_last_id"
+		value_int="0">
+	</VariableStorageComponent>
+	<VariableStorageComponent
+		_tags="camera_carrier_next_id"
+		value_int="0">
+	</VariableStorageComponent>
+	<LuaComponent
+		script_source_file="__THIS_FOLDER__carrier_end.lua"
+		execute_on_removed="1"
+		execute_every_n_frame="-1">
+	</LuaComponent>
+	<LuaComponent
+		script_source_file="__THIS_FOLDER__carrier_start.lua"
+		execute_every_n_frame="1"
+		remove_after_executed="1">
+	</LuaComponent>
+	<StreamingKeepAliveComponent/>
+</Entity>

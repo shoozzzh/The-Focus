@@ -1,0 +1,77 @@
+<Entity name="$projectile_default" cloneable="0" >
+	<Base file="data/entities/projectiles/deck/base_field.xml" >
+		<VelocityComponent affect_physics_bodies="1" />
+		<SpriteParticleEmitterComponent _enabled="0" />
+		<ProjectileComponent damage_game_effect_entities="" />
+	</Base>
+	<SpriteComponent
+		image_file="__THIS_FOLDER__projectile_background.png"
+		offset_x="32"
+		offset_y="32"
+		alpha="0.4"
+		additive="1">
+	</SpriteComponent>
+	<GameAreaEffectComponent
+		radius="28"
+		frame_length="70">
+	</GameAreaEffectComponent>
+	<ParticleEmitterComponent 
+		emitted_material_name="plasma_fading"
+		gravity.y="0.0"
+		lifetime_min="0.5"
+		lifetime_max="1.5"
+		count_min="20"
+		count_max="40"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		area_circle_radius.max="26"
+		area_circle_radius.min="26"
+		cosmetic_force_create="1"
+		airflow_force="0.1"
+		airflow_time="0.01"
+		airflow_scale="0.05"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+	<ParticleEmitterComponent 
+		emitted_material_name="plasma_fading"
+		gravity.y="0.0"
+		lifetime_min="0.5"
+		lifetime_max="1.5"
+		count_min="20"
+		count_max="40"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		area_circle_radius.max="16"
+		area_circle_radius.min="16"
+		cosmetic_force_create="1"
+		airflow_force="0.1"
+		airflow_time="0.01"
+		airflow_scale="0.05"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+	<PhysicsBodyComponent 
+		_tags="enabled_in_world"
+		uid="1"
+		is_bullet="1"
+		auto_clean="0"
+		on_death_leave_physics_body="0"
+		initial_velocity.x="0"
+		initial_velocity.y="0">
+	</PhysicsBodyComponent>
+	<PhysicsImageShapeComponent 
+		body_id="1"
+		centered="1"
+		image_file="__THIS_FOLDER__projectile.png"
+		material="crystal_magic"
+	></PhysicsImageShapeComponent>
+	<PhysicsKeepInWorldComponent
+		check_whole_aabb="1"
+		predict_aabb="1" >
+	</PhysicsKeepInWorldComponent>
+</Entity>

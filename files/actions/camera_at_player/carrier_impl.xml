@@ -1,0 +1,5 @@
+<Entity name="___camera_at_player_impl">
+	<InheritTransformComponent/>
+	<Base file="__MOD_ACTION_UTILS__camera/carrier.xml" />
+	<Base file="__MOD_ACTION_UTILS__camera/carrying_nearby.xml" />
+</Entity>

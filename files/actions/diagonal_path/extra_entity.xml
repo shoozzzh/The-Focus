@@ -1,0 +1,7 @@
+<Entity>
+	<CardinalMovementComponent
+		horizontal_movement="0"
+		vertical_movement="0"
+		intercardinal_movement="1">
+	</CardinalMovementComponent>
+</Entity>

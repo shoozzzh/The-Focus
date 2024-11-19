@@ -1,0 +1,14 @@
+<Entity name="$projectile_default" >
+	<Base file="__MOD_ACTION_UTILS__movement/base_projectile.xml">
+		<ProjectileComponent
+			speed_min="600"
+			speed_max="600"
+			lifetime="10"
+			knockback_force="8"
+			ragdoll_force_multiplier="0.2">
+			<damage_by_type
+				melee="1.8">
+			</damage_by_type>
+		</ProjectileComponent>
+	</Base>
+</Entity>

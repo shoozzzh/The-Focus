@@ -1,0 +1,3 @@
+<Entity>
+	<LifetimeComponent lifetime="300" />
+</Entity>
