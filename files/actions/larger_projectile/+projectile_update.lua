@@ -14,7 +14,7 @@ local function sign( n )
 	return n > 0 and 1 or n == 0 and 0 or -1
 end
 
-EntitySetTransform( entity_id, x, y, r, sign( scale_x ) * multiplier, sign( scale_y ) * multiplier )
+EntityApplyTransform( entity_id, x, y, r, sign( scale_x ) * multiplier, sign( scale_y ) * multiplier )
 
 local function keep_fields_multiplied( comp, ... )
 	local fields = { ... }

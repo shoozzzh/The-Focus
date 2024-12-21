@@ -38,12 +38,8 @@ end
 
 function get_vec2_field_or_default( comp_id, field_name, default_left_value, default_right_value )
 	local result_left, result_right = ComponentGetValue2( comp_id, field_name )
-	if result_left == nil then
-		result_left = default_left_value
-	end
-	if result_right == nil then
-		result_right = default_right_value
-	end
+	if result_left  == nil then result_left  = default_left_value  end
+	if result_right == nil then result_right = default_right_value end
 	return result_left, result_right
 end
 
@@ -58,7 +54,9 @@ function edit_object_field( comp_id, object_name, field_name, value_func, defaul
 end
 
 function edit_vec2_field( comp_id, field_name, value_func, default_old_left_value, default_old_right_value )
-	local left, right = ComponentGetValue2( comp_id, field_name, default_old_left_value, default_old_right_value )
+	local left, right = ComponentGetValue2( comp_id, field_name )
+	if left  == nil then left  = default_old_left_value  end
+	if right == nil then right = default_old_right_value end
 	left, right = value_func( left, right )
 	ComponentSetValue2( comp_id, field_name, left, right )
 end
@@ -85,7 +83,9 @@ end
 
 function read_var( entity_id, var_name, var_type )
 	local var_comp = find_var_comp( entity_id, var_name )
-	return ComponentGetValue2( var_comp, var_type )
+	if var_comp then
+		return ComponentGetValue2( var_comp, var_type )
+	end
 end
 
 function read_and_update_var( entity_id, var_name, var_type, update_fn )

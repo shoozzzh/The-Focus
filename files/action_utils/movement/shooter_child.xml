@@ -1,0 +1,5 @@
+<Entity tags="___movement_shooter_child" >
+	<AttachToEntityComponent _enabled="0" />
+	<InheritTransformComponent/>
+	<VariableStorageComponent name="___current_movement" />
+</Entity>

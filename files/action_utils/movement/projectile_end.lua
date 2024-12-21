@@ -1,15 +1,19 @@
 dofile_once( "data/scripts/lib/utilities.lua" )
+dofile_once( "__MOD_ACTION_UTILS__comp_utils.lua" )
+
 local entity_id = GetUpdatedEntityID()
 local shooter_id = ComponentGetValue2( EntityGetFirstComponent( entity_id, "ProjectileComponent" ), "mWhoShot" )
-if shooter_id == 0 then return end
-local cmp_comp = get_variable_storage_component( shooter_id, "___current_movement" )
-if cmp_comp == 0 then return end
-if entity_id ~= ComponentGetValue2( cmp_comp, "value_int" ) then return end
+if not EntityGetIsAlive( shooter_id ) then return end
+
+local mv_child_id = EntityGetAllChildren( shooter_id, "___movement_shooter_child" )[1]
+if not EntityGetIsAlive( mv_child_id ) then return end
+if entity_id ~= read_var( mv_child_id, "___current_movement", "value_int" ) then return end
+
+local transform_comp = EntityGetFirstComponentIncludingDisabled( mv_child_id, "AttachToEntityComponent" )
+local _, _, scale_x, scale_y, rotation = ComponentGetValue2( transform_comp, "Transform" )
 local x, y = EntityGetTransform( entity_id )
-local init_rotation = ComponentGetValue2( get_variable_storage_component( entity_id, "___init_rotation" ), "value_float" )
-local init_scale_x = ComponentGetValue2( get_variable_storage_component( entity_id, "___init_scale_x" ), "value_float" )
-local init_scale_y = ComponentGetValue2( get_variable_storage_component( entity_id, "___init_scale_y" ), "value_float" )
-EntitySetTransform( shooter_id, x, y, init_rotation, init_scale_x, init_scale_y )
+EntitySetTransform( shooter_id, x, y, rotation, scale_x, scale_y )
+
 shoot_projectile( shooter_id, "__MOD_ACTION_UTILS__teleportation_to_free_space.xml", x, y, 0, 0, false )
 
 local hit_tag = dofile( "__THIS_FOLDER__get_nearby_tag.lua" )

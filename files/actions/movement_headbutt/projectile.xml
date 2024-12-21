@@ -6,9 +6,13 @@
 			lifetime="10"
 			knockback_force="8"
 			ragdoll_force_multiplier="0.2">
-			<damage_by_type
-				melee="1.8">
-			</damage_by_type>
+			<damage_by_type melee="1.8" />
 		</ProjectileComponent>
 	</Base>
+	<LuaComponent
+		_enabled="0"
+		_tags="___movement_impl"
+		script_source_file="__THIS_FOLDER__movement_update.lua"
+		execute_every_n_frame="1">
+	</LuaComponent>
 </Entity>
