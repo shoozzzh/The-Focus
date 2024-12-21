@@ -5,7 +5,7 @@ local entity_id = GetUpdatedEntityID()
 local shooter_id = ComponentGetValue2( EntityGetFirstComponent( entity_id, "ProjectileComponent" ), "mWhoShot" )
 if not EntityGetIsAlive( shooter_id ) then return end
 
-local mv_child_id = EntityGetAllChildren( shooter_id, "___movement_shooter_child" )[1]
+local mv_child_id = ( EntityGetAllChildren( shooter_id, "___movement_shooter_child" ) or {} )[1]
 if not EntityGetIsAlive( mv_child_id ) then return end
 if entity_id ~= read_var( mv_child_id, "___current_movement", "value_int" ) then return end
 

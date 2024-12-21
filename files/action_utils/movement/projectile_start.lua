@@ -6,7 +6,7 @@ local proj_comp = EntityGetFirstComponent( entity_id, "ProjectileComponent" )
 local shooter_id = ComponentGetValue2( proj_comp, "mWhoShot" )
 if not EntityGetIsAlive( shooter_id ) then return end
 
-local mv_child_id = EntityGetAllChildren( shooter_id, "___movement_shooter_child" )[1]
+local mv_child_id = ( EntityGetAllChildren( shooter_id, "___movement_shooter_child" ) or {} )[1]
 if not EntityGetIsAlive( mv_child_id ) then
 	mv_child_id = EntityLoad( "__THIS_FOLDER__shooter_child.xml" )
 	EntityAddChild( shooter_id, mv_child_id )

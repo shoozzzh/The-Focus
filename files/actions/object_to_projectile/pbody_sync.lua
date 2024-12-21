@@ -9,7 +9,7 @@ if not pbody_id then return end
 local pbody_x, pbody_y, pbody_rot, pbody_vx, pbody_vy = PhysicsBodyIDGetTransform( pbody_id )
 if not pbody_x then
 	if EntityHasTag( entity_id, "pbody2_sync" ) then
-		local pbody_entity = EntityGetAllChildren( entity_id, "pbody_sync" )[1]
+		local pbody_entity = ( EntityGetAllChildren( entity_id, "pbody_sync" ) or {} )[1]
 		if not is_valid_entity( pbody_entity ) then
 			EntityKill( entity_id )
 			return
