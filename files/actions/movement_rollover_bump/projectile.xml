@@ -13,6 +13,7 @@
 		circle_radius="8"
 		damage_per_frame="0.6"
 		update_every_n_frame="10"
+		entities_with_tag="homing_target"
 		aabb_min.x="-8"
 		aabb_max.x="8"
 		aabb_min.y="-8"
@@ -20,12 +21,6 @@
 		death_cause="$damage_melee"
 		damage_type="DAMAGE_MELEE">
 	</AreaDamageComponent>
-	<LuaComponent
-		_enabled="0"
-		_tags="___movement_impl"
-		script_source_file="__THIS_FOLDER__movement_update.lua"
-		execute_every_n_frame="1">
-	</LuaComponent>
 	<AudioLoopComponent
 		_tags="spinning_sound"
 		file="materials.bank"

@@ -1,4 +1,5 @@
 local injectable_func_names = {
+	"_set_gun",
 	"order_deck",
 	"_draw_actions_for_shot",
 	"_clear_deck",

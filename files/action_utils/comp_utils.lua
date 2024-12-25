@@ -88,11 +88,15 @@ function read_var( entity_id, var_name, var_type )
 	end
 end
 
-function read_and_update_var( entity_id, var_name, var_type, update_fn )
+function read_and_update_var( entity_id, var_name, var_type, updator )
 	local var_comp = find_var_comp( entity_id, var_name )
 	local result = ComponentGetValue2( var_comp, var_type )
 	if result then
-		ComponentSetValue2( var_comp, var_type, update_fn( result ) )
+		if type( updator ) == "function" then
+			ComponentSetValue2( var_comp, var_type, updator( result ) )
+		else
+			ComponentSetValue2( var_comp, var_type, updator )
+		end
 	end
 	return result
 end

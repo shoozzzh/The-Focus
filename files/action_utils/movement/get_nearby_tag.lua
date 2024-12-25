@@ -1,1 +1,0 @@
-return "mvproj_nearby_" .. tostring( math.fmod( GetUpdatedEntityID(), 32 ) )

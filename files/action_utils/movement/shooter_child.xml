@@ -1,5 +1,10 @@
 <Entity tags="___movement_shooter_child" >
 	<AttachToEntityComponent _enabled="0" />
 	<InheritTransformComponent/>
-	<VariableStorageComponent name="___current_movement" />
+	<VariableStorageComponent name="current_movement" />
+	<VariableStorageComponent name="movement_heartbeat" />
+	<LuaComponent
+		script_source_file="__THIS_FOLDER__shooter_child_update.lua"
+		execute_every_n_frame="1">
+	</LuaComponent>
 </Entity>

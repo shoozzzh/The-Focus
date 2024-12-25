@@ -9,10 +9,4 @@
 			<damage_by_type melee="1.8" />
 		</ProjectileComponent>
 	</Base>
-	<LuaComponent
-		_enabled="0"
-		_tags="___movement_impl"
-		script_source_file="__THIS_FOLDER__movement_update.lua"
-		execute_every_n_frame="1">
-	</LuaComponent>
 </Entity>

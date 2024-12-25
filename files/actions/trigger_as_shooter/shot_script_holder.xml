@@ -1,0 +1,4 @@
+<Entity tags="__ACTION_ID___shot_script_holder">
+	<InheritTransformComponent/>
+	<LuaComponent script_shot="__THIS_FOLDER__shot.lua" />
+</Entity>

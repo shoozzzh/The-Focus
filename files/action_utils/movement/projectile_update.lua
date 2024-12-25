@@ -1,15 +1,39 @@
+dofile_once( "__MOD_ACTION_UTILS__comp_utils.lua" )
+
 local entity_id = GetUpdatedEntityID()
-local shooter_id = ComponentGetValue2( EntityGetFirstComponent( entity_id, "ProjectileComponent" ), "mWhoShot" )
-local x, y = EntityGetTransform( entity_id )
-local vx, vy = GameGetVelocityCompVelocity( entity_id )
-local hit_tag = dofile( "__THIS_FOLDER__get_nearby_tag.lua" )
-local last_frame_tagged = EntityGetWithTag( hit_tag )
-for _, tagged in ipairs( last_frame_tagged ) do
-	EntityRemoveTag( tagged, hit_tag )
+local proj_comp = EntityGetFirstComponent( entity_id, "ProjectileComponent" )
+local shooter_id = ComponentGetValue2( proj_comp, "mWhoShot" )
+if not EntityGetIsAlive( shooter_id ) then
+	EntitySetComponentsWithTagEnabled( entity_id, "___movement", false )
+	EntityKill( entity_id )
+	return
 end
-local hittables_in_radius = EntityGetInRadiusWithTag( x, y, vx + vy, "hittable" )
-for _, hittable in ipairs( hittables_in_radius ) do
-	if hittable ~= shooter_id then
-		EntityAddTag( hittable, hit_tag )
+
+local mv_child_id = ( EntityGetAllChildren( shooter_id, "___movement_shooter_child" ) or {} )[1]
+if not EntityGetIsAlive( mv_child_id ) then
+	mv_child_id = EntityLoad( "__THIS_FOLDER__shooter_child.xml" )
+	EntityAddChild( shooter_id, mv_child_id )
+	local transform_comp = EntityGetFirstComponentIncludingDisabled( mv_child_id, "AttachToEntityComponent" )
+	local _, _, rotation, scale_x, scale_y = EntityGetTransform( shooter_id )
+	ComponentSetValue2( transform_comp, "Transform", 0, 0, scale_x, scale_y, rotation )
+end
+
+local current_movement_comp = get_var_comp( mv_child_id, "current_movement" )
+local current_movement = ComponentGetValue2( current_movement_comp, "value_int" )
+if current_movement ~= entity_id then
+	if EntityGetIsAlive( current_movement ) then
+		EntitySetComponentsWithTagEnabled( current_movement, "___movement", false )
+		EntityKill( current_movement )
 	end
+	ComponentSetValue2( current_movement_comp, "value_int", entity_id )
+end
+
+write_var( mv_child_id, "movement_heartbeat", "value_bool", true )
+
+ComponentSetValue2( proj_comp, "collide_with_shooter_frames", 256 )
+
+if not EntityHasTag( entity_id, "___movement_initialized" ) then
+	EntitySetComponentIsEnabled( entity_id,
+		EntityGetFirstComponentIncludingDisabled( entity_id, "GameAreaEffectComponent" ), true )
+	EntityAddTag( entity_id, "___movement_initialized" )
 end
