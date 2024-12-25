@@ -13,4 +13,5 @@ local x, y = EntityGetTransform( parent_id )
 EntitySetTransform( parent_id, x, y, rotation, scale_x, scale_y )
 shoot_projectile( parent_id, "__MOD_ACTION_UTILS__teleportation_to_free_space.xml", x, y, 0, 0, false )
 
+EntityRemoveFromParent( entity_id )
 EntityKill( entity_id )

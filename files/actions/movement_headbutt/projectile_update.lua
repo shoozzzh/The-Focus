@@ -4,11 +4,6 @@ dofile( "__MOD_ACTION_UTILS__movement/projectile_update.lua" )
 
 local entity_id = GetUpdatedEntityID()
 
-if not EntityHasTag( entity_id, "___movement_initialized" ) then
-	EntityAddTag( entity_id, "___movement_initialized" )
-	return
-end
-
 local proj_comp = EntityGetFirstComponent( entity_id, "ProjectileComponent" )
 local shooter_id = ComponentGetValue2( proj_comp, "mWhoShot" )
 if not EntityGetIsAlive( shooter_id ) then return end
