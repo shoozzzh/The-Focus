@@ -1,7 +1,7 @@
 return use_templates{
 	mana = 150,
 	price = 300,
-	_do_in_advance = function()
+	_before_that = function()
 		c.speed_multiplier = c.speed_multiplier * 0.5
 		c.fire_rate_wait = c.fire_rate_wait + 60
 	end

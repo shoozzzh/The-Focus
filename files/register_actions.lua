@@ -51,11 +51,11 @@ function action_templates:decorate_action_fn()
 			and_then()
 		end
 	end
-	if self._do_in_advance ~= nil then
+	if self._before_that ~= nil then
 		local action = self.action
-		local do_in_advance = self._do_in_advance
+		local before_that = self._before_that
 		self.action = function()
-			do_in_advance()
+			before_that()
 			action()
 		end
 	end

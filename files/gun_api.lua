@@ -1,12 +1,27 @@
+do
+	local old = set_current_action
+	function set_current_action( ... )
+		if reflecting or ( c.action_description == "" and c.state_destroyed_action == false ) then
+			old( ... )
+			return
+		end
+
+		local saved = { c.action_description, c.state_destroyed_action }
+		old( ... )
+		c.action_description, c.state_destroyed_action = unpack( saved )
+	end
+end
+
 local injectable_func_names = {
 	"_set_gun",
 	"order_deck",
 	"_draw_actions_for_shot",
 	"_clear_deck",
 	"_add_card_to_deck",
-	"set_current_action",
+	-- "set_current_action",
 	"move_hand_to_discarded",
 	"ActionUsesRemainingChanged",
+	"play_action",
 }
 local injectable_funcs = {}
 for _, name in ipairs( injectable_func_names ) do

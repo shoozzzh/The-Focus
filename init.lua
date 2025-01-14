@@ -52,6 +52,7 @@ for _, subfolder in ipairs( dofile_or_default( pathes.MOD_ACTION_UTILS .. "subfo
 end
 replace_placeholders_in_file( pathes.MOD_ACTIONS, "action_folder_names.lua" )
 replace_placeholders_in_file( pathes.MOD_FILES, "gun_api.lua" )
+replace_placeholders_in_file( pathes.MOD_ACTION_UTILS, "shot_capture.lua" )
 replace_placeholders_in_file( pathes.MOD_FILES, "register_actions.lua" )
 
 -- < / replace_placeholders_in_general_files >
@@ -60,6 +61,7 @@ replace_placeholders_in_file( pathes.MOD_FILES, "register_actions.lua" )
 
 ModLuaFileAppend( "data/scripts/gun/gun_actions.lua", pathes.MOD_FILES .. "register_actions.lua" )
 ModLuaFileAppend( "data/scripts/gun/gun.lua", pathes.MOD_FILES .. "gun_api.lua" )
+ModLuaFileAppend( "data/scripts/gun/gun.lua", pathes.MOD_ACTION_UTILS .. "shot_capture.lua" )
 
 do
 	local gun_collect_metadata_lua = "data/scripts/gun/gun_collect_metadata.lua"

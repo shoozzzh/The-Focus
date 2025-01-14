@@ -111,7 +111,7 @@ end
 
 local proj_comp = EntityGetFirstComponent( entity_id, "ProjectileComponent" )
 local who_shot = ComponentGetValue2( proj_comp, "mWhoShot" )
-local herd_id = get_herd_id( who_shot )
+local herd_id = ComponentGetValue2( proj_comp, "mShooterHerdId" )
 local ptb_proj_comp = EntityGetFirstComponent( proj_to_be_id, "ProjectileComponent" )
 if ptb_proj_comp then
 	ComponentSetValue2( ptb_proj_comp, "mWhoShot", who_shot )
