@@ -11,25 +11,29 @@ local is_player = EntityHasTag( give_wand_to, "player_unit" )
 local ipu_comp = EntityGetFirstComponent( give_wand_to, "ItemPickUpperComponent" )
 
 if ipu_comp then
-	if not is_player and ComponentGetValue2( ipu_comp, "is_in_npc" ) then
-		GameDropAllItems( give_wand_to )
-	else
-		local inventory_quick = stream( EntityGetAllChildren( give_wand_to ) or {} )
-			.filter( function( e ) return EntityGetName( e ) == "inventory_quick" end )
-			.next()
-		if inventory_quick then
-			local taken = {}
-			for _, e in ipairs( EntityGetAllChildren( inventory_quick ) or {} ) do
-				local item_comp = EntityGetFirstComponentIncludingDisabled( e, "ItemComponent" )
-				local item_x, item_y = ComponentGetValue2( item_comp, "inventory_slot" )
-				if item_y == 0 then
-					taken[item_x] = true
+	if not ComponentHasTag( ipu_comp, "__ACTION_ID__" ) then
+		if not is_player and ComponentGetValue2( ipu_comp, "is_in_npc" ) then
+			GameDropAllItems( give_wand_to )
+		else
+			local inventory_quick = stream( EntityGetAllChildren( give_wand_to ) or {} )
+				.filter( function( e ) return EntityGetName( e ) == "inventory_quick" end )
+				.next()
+			if inventory_quick then
+				local taken = {}
+				for _, e in ipairs( EntityGetAllChildren( inventory_quick ) or {} ) do
+					local item_comp = EntityGetFirstComponentIncludingDisabled( e, "ItemComponent" )
+					local item_x, item_y = ComponentGetValue2( item_comp, "inventory_slot" )
+					if item_y == 0 then
+						taken[item_x] = true
+					end
+				end
+				if taken[0] and taken[1] and taken[2] and taken[3] then
+					return
 				end
 			end
-			if taken[0] and taken[1] and taken[2] and taken[3] then
-				return
-			end
 		end
+	else
+		ipu_comp = nil
 	end
 else
 	--[[local proj_comp = EntityGetFirstComponent( entity_id, "ProjectileComponent" )
@@ -94,4 +98,9 @@ ComponentObjectSetValue2( ab_comp, "gunaction_config", "state_destroyed_action" 
 ComponentSetValue2( ab_comp, "ui_name",
 	one_off and "$__ACTION_ID___temporary_wand_one_off" or "$__ACTION_ID___temporary_wand" )
 
+if not ipu_comp then
+	ComponentSetValue2(
+		EntityGetFirstComponentIncludingDisabled( give_wand_to, "ItemPickUpperComponent" ),
+		"only_pick_this_entity", wand_id )
+end
 GamePickUpInventoryItem( give_wand_to, wand_id, false )
