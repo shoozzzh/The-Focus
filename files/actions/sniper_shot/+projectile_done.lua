@@ -46,8 +46,8 @@ local function check_shot( vict_id, mx, my )
 
 	local pbody_comp = EntityGetFirstComponent( vict_id, "PhysicsBody2Component" ) or EntityGetFirstComponent( vict_id, "PhysicsBodyComponent")
 	if pbody_comp then
-		local vict_x, vict_y = PhysicsPosToGamePos( box2d_x, box2d_y )
 		local box2d_x, box2d_y = PhysicsComponentGetTransform( pbody_comp )
+		local vict_x, vict_y = PhysicsPosToGamePos( box2d_x, box2d_y )
 		if get_distance2( mx, my, vict_x, vict_y ) <= 400 then
 			return true, vict_x, vict_y
 		end

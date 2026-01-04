@@ -10,6 +10,7 @@ local pbody_x, pbody_y, pbody_rot, pbody_vx, pbody_vy = PhysicsBodyIDGetTransfor
 if not pbody_x then
 	if EntityHasTag( entity_id, "pbody2_sync" ) then
 		local pbody_entity = ( EntityGetAllChildren( entity_id, "pbody_sync" ) or {} )[1]
+		local x, y = EntityGetTransform( entity_id )
 		if not is_valid_entity( pbody_entity ) then
 			EntityKill( entity_id )
 			return
@@ -23,7 +24,7 @@ if not pbody_x then
 		.flatmap( function( c )
 			local ps = {}
 			for _, p in ipairs( PhysicsBodyIDGetFromEntity( pbody_entity, c ) ) do
-				table.insert( ps, { e, get_distance2( x, y, PhysicsBodyIDGetTransform( p ) ) } )
+				table.insert( ps, { p, get_distance2( x, y, PhysicsBodyIDGetTransform( p ) ) } )
 			end
 			return ps
 		end )

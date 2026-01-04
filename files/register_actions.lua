@@ -1,4 +1,5 @@
 local action_templates = {}
+
 function use_templates( action )
 	setmetatable( action, { __index = action_templates } )
 	return action

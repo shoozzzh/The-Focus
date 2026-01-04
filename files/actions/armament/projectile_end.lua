@@ -39,7 +39,7 @@ else
 	local proj_comp = EntityGetFirstComponent( entity_id, "ProjectileComponent" )
 	if not is_player and ComponentGetValue2( proj_comp, "mShooterHerdId" ) == 0 then
 		local gd_comp = EntityGetFirstComponent( entity_id, "GenomeDataComponent" )
-		local is_ally = gd_comp and ComponentGetValue2( gd_comp, herd_id ) == 0
+		local is_ally = gd_comp and ComponentGetValue2( gd_comp, "herd_id" ) == 0
 		local is_charmed = GameGetGameEffect( give_wand_to, "CHARM" ) ~= 0
 
 		if is_ally or is_charmed then

@@ -40,6 +40,8 @@ The input parameter must be nil or one of type table, boolean, number, string, o
   each call.
 * If input is nil (or not provided at all), then the new stream is empty.
 --]]
+
+---@module '__MOD_LIBS__stream.lua'
 function stream(input)
 
     -- The following _* functions are internal functions that implement the stream's behaviour based

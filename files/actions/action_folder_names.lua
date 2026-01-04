@@ -31,10 +31,10 @@ local action_folder_names = {
 	"lifetime_stainless",
 	"lifetime_no_hit",
 	"gold_collector",
-	-- "literal_material_eater",
 	"double_shot",
 	"armament",
 	"fake_projectile_spell",
+	"actual_material_eater",
 }
 
 function action_folder_name_to_id( folder_name )
