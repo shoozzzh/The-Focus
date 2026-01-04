@@ -1,4 +1,4 @@
-dofile_once( "__MOD_ACTION_UTILS__proj_cfg_utils.lua" )
+dofile_once( "__MOD_UTILS__proj_cfg_utils.lua" )
 
 local entity_id = GetUpdatedEntityID()
 local proj_comp = EntityGetFirstComponent( entity_id, "ProjectileComponent" )

@@ -1,4 +1,4 @@
-dofile_once( "__MOD_ACTION_UTILS__shot_capture.lua" )
+dofile_once( "__MOD_UTILS__shot_capture.lua" )
 
 local injection = new_injection()
 

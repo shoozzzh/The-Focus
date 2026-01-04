@@ -27,7 +27,10 @@ end
 
 function dofile_or_default( filepath, default )
 	local exists = ModDoesFileExist( filepath )
-	if exists then return dofile( filepath ) end
+	if exists then
+		local result = dofile( filepath )
+		return result or default
+	end
 	return default
 end
 
@@ -41,18 +44,18 @@ end
 
 -- < replace_placeholders_in_general_files >
 
-for _, filename in ipairs( dofile_or_default( pathes.MOD_ACTION_UTILS .. "files_used_placeholders.lua", {} ) ) do
-	replace_placeholders_in_file( pathes.MOD_ACTION_UTILS, filename )
+for _, filename in ipairs( dofile_or_default( pathes.MOD_UTILS .. "files_used_placeholders.lua", {} ) ) do
+	replace_placeholders_in_file( pathes.MOD_UTILS, filename )
 end
-for _, subfolder in ipairs( dofile_or_default( pathes.MOD_ACTION_UTILS .. "subfolders.lua", {} ) ) do
-	local path = pathes.MOD_ACTION_UTILS .. subfolder .. "/"
+for _, subfolder in ipairs( dofile_or_default( pathes.MOD_UTILS .. "subfolders.lua", {} ) ) do
+	local path = pathes.MOD_UTILS .. subfolder .. "/"
 	for _, filename in ipairs( dofile_or_default( path .. "files_used_placeholders.lua", {} ) ) do
 		replace_placeholders_in_file( path, filename )
 	end
 end
 replace_placeholders_in_file( pathes.MOD_ACTIONS, "action_folder_names.lua" )
 replace_placeholders_in_file( pathes.MOD_FILES, "gun_api.lua" )
-replace_placeholders_in_file( pathes.MOD_ACTION_UTILS, "shot_capture.lua" )
+replace_placeholders_in_file( pathes.MOD_UTILS, "shot_capture.lua" )
 replace_placeholders_in_file( pathes.MOD_FILES, "register_actions.lua" )
 
 -- < / replace_placeholders_in_general_files >
@@ -61,18 +64,23 @@ replace_placeholders_in_file( pathes.MOD_FILES, "register_actions.lua" )
 
 ModLuaFileAppend( "data/scripts/gun/gun_actions.lua", pathes.MOD_FILES .. "register_actions.lua" )
 ModLuaFileAppend( "data/scripts/gun/gun.lua", pathes.MOD_FILES .. "gun_api.lua" )
-ModLuaFileAppend( "data/scripts/gun/gun.lua", pathes.MOD_ACTION_UTILS .. "shot_capture.lua" )
+ModLuaFileAppend( "data/scripts/gun/gun.lua", pathes.MOD_UTILS .. "shot_capture.lua" )
 
 do
 	local gun_collect_metadata_lua = "data/scripts/gun/gun_collect_metadata.lua"
 	local old = ModTextFileGetContent( gun_collect_metadata_lua )
 	local start_idx = old:find( "reflecting = true" )
+	if not start_idx then
+		print_error( "Couldn't find reflecting = true in " .. gun_collect_metadata_lua )
+		goto brik
+	end
 	local new = old:sub( 1, start_idx - 1 )
-		.. 'dofile( "' .. pathes.MOD_ACTION_UTILS .. 'non_rival_weights.lua" )\n'
+		.. 'dofile( "' .. pathes.MOD_UTILS .. 'non_rival_weights.lua" )\n'
 		.. old:sub( start_idx, -1 )
 	new = new:gsub("\r\n\r\n","\r\n")
 	ModTextFileSetContent( gun_collect_metadata_lua, new )
 end
+::brik::
 
 -- < / append_appendences >
 
@@ -270,7 +278,7 @@ pathes.THIS_FILE = nil
 ModTextFileSetContent( "data/entities/_debug/_free_camera_light.xml",
 	ModTextFileGetContent( "data/entities/_debug/free_camera_light.xml" ) )
 ModTextFileSetContent( "data/entities/_debug/free_camera_light.xml",
-	ModTextFileGetContent( pathes.MOD_ACTION_UTILS .. "camera/free_camera_light.xml" ) )
+	ModTextFileGetContent( pathes.MOD_UTILS .. "camera/free_camera_light.xml" ) )
 
 for _, action_folder_name in ipairs( action_folder_names ) do
 	local path = action_folder_name_to_path( action_folder_name )

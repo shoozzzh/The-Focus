@@ -112,7 +112,7 @@ function write_var( entity_id, var_name, var_type, value )
 	ComponentSetValue2( get_var_comp( entity_id, var_name ), var_type, value )
 end
 
-local vars_view_mt = {
+local vars_access_mt = {
 	__index = function( t, k )
 		local comp, type = unpack( rawget( t, k ) )
 		return ComponentGetValue2( comp, type )
@@ -122,11 +122,11 @@ local vars_view_mt = {
 		ComponentSetValue2( comp, type, v )
 	end,
 }
-function view_vars( entity_id, var_map )
+function access_vars( entity_id, var_map )
 	local result = {}
 	for var_name, var_type in pairs( var_map ) do
 		result[ var_name ] = { var_comp, var_type }
 	end
-	setmetatable( result, vars_view_mt )
+	setmetatable( result, vars_access_mt )
 	return result
 end

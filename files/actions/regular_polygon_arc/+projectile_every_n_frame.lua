@@ -1,8 +1,8 @@
 -- n = 6
 dofile_once( "data/scripts/lib/utilities.lua" )
-dofile_once( "__MOD_ACTION_UTILS__comp_utils.lua" )
+dofile_once( "__MOD_UTILS__comp_utils.lua" )
 
-if not dofile( "__MOD_ACTION_UTILS__unique_script.lua" ) then return end
+if not dofile( "__MOD_UTILS__unique_script.lua" ) then return end
 
 local entity_id = GetUpdatedEntityID()
 local vel_comp = EntityGetFirstComponent( entity_id, "VelocityComponent" )

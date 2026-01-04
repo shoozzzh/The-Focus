@@ -1,7 +1,7 @@
 dofile_once( "data/scripts/lib/utilities.lua" )
 dofile_once( "__MOD_LIBS__stream.lua" )
-dofile_once( "__MOD_ACTION_UTILS__proj_cfg_utils.lua" )
-dofile_once( "__MOD_ACTION_UTILS__comp_utils.lua" )
+dofile_once( "__MOD_UTILS__proj_cfg_utils.lua" )
+dofile_once( "__MOD_UTILS__comp_utils.lua" )
 
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform( entity_id )

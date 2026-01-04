@@ -1,6 +1,6 @@
-if not dofile( "__MOD_ACTION_UTILS__unique_script.lua" ) then return end
+if not dofile( "__MOD_UTILS__unique_script.lua" ) then return end
 
-dofile_once( "__MOD_ACTION_UTILS__comp_utils.lua" )
+dofile_once( "__MOD_UTILS__comp_utils.lua" )
 dofile_once( "__MOD_LIBS__stream.lua" )
 
 local entity_id = GetUpdatedEntityID()

@@ -1,5 +1,5 @@
 dofile_once( "data/scripts/lib/utilities.lua" )
-dofile_once( "__MOD_ACTION_UTILS__comp_utils.lua" )
+dofile_once( "__MOD_UTILS__comp_utils.lua" )
 
 local entity_id = GetUpdatedEntityID()
 local x, y, r = EntityGetTransform( entity_id )

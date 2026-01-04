@@ -1,4 +1,4 @@
-dofile_once( "__MOD_ACTION_UTILS__comp_utils.lua" )
+dofile_once( "__MOD_UTILS__comp_utils.lua" )
 local entity_id = GetUpdatedEntityID()
 local gravity_sign_comp, extracted = get_var_comp( entity_id, "___gravity_sign" )
 if extracted then

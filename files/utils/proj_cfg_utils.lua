@@ -1,4 +1,4 @@
-dofile_once( "__MOD_ACTION_UTILS__comp_utils.lua" )
+dofile_once( "__MOD_UTILS__comp_utils.lua" )
 
 local fields_available = {
 	-- "action_id",
@@ -46,9 +46,9 @@ local fields_available = {
 	-- "explosion_damage_to_materials",
 	"knockback_force",
 	-- "reload_time",
-	-- "lightning_count",
-	-- "material",
-	-- "material_amount",
+	"lightning_count",
+	"material",
+	"material_amount",
 	"trail_material",
 	"trail_material_amount",
 	"bounces",
@@ -56,7 +56,7 @@ local fields_available = {
 	-- "light",
 	"blood_count_multiplier",
 	"gore_particles", -- TODO
-	-- "ragdoll_fx",
+	"ragdoll_fx",
 	"friendly_fire",
 	-- "physics_impulse_coeff",
 	"lifetime_add",
@@ -92,6 +92,31 @@ local modifiable_damage_types = {
 	"healing",
 	"curse",
 	"drill",
+}
+
+local enum_ragdoll_fx = {
+	[0] = "NONE",
+	"NORMAL",
+	"BLOOD_EXPLOSION",
+	"BLOOD_SPRAY",
+	"FROZEN",
+	"CONVERT_TO_MATERIAL",
+	"CUSTOM_RAGDOLL_ENTITY",
+	"DISINTEGRATED",
+	"NO_RAGDOLL_FILE",
+	"PLAYER_RAGDOLL_CAMERA",
+}
+local enum_ragdoll_fx_tonumber = {
+	NONE                  = 0,
+	NORMAL                = 1,
+	BLOOD_EXPLOSION       = 2,
+	BLOOD_SPRAY           = 3,
+	FROZEN                = 4,
+	CONVERT_TO_MATERIAL   = 5,
+	CUSTOM_RAGDOLL_ENTITY = 6,
+	DISINTEGRATED         = 7,
+	NO_RAGDOLL_FILE       = 8,
+	PLAYER_RAGDOLL_CAMERA = 9,
 }
 
 function apply_proj_cfg( proj_cfg, entity_id )
@@ -130,6 +155,26 @@ function apply_proj_cfg( proj_cfg, entity_id )
 			if lifetime == -1 then return -1 end
 			return lifetime + proj_cfg.lifetime_add
 		end, 0 )
+
+		ComponentObjectSetValue2( comp, "config_explosion", "create_cell_material", proj_cfg.material )
+
+		edit_object_field( comp, "config_explosion", "create_cell_probability", function( prob )
+			return prob + proj_cfg.material_amount
+		end, 0 )
+
+		edit_object_field( comp, "config_explosion", "electricity_count", function( count )
+			return count + proj_cfg.lightning_count
+		end, 0 )
+
+		edit_field( comp, "ragdoll_fx_on_collision", function( fx )
+			local cfg_fx_number = proj_cfg.ragdoll_fx
+			local fx_number = enum_ragdoll_fx_tonumber[ fx ]
+			if cfg_fx_number <= fx_number then
+				return fx
+			else
+				return enum_ragdoll_fx[ cfg_fx_number ]
+			end
+		end, "NORMAL" )
 	end )
 
 	string.gsub( proj_cfg.extra_entities, "[^,]+", function( extra_entity_file )

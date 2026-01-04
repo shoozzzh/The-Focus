@@ -1,5 +1,5 @@
 <Entity name="$projectile_default" >
-	<Base file="__MOD_ACTION_UTILS__movement/base_projectile.xml">
+	<Base file="__MOD_UTILS__movement/base_projectile.xml">
 		<ProjectileComponent
 			speed_min="400"
 			speed_max="400"

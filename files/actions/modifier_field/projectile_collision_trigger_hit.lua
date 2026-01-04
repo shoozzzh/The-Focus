@@ -1,6 +1,6 @@
-dofile_once( "__MOD_ACTION_UTILS__proj_cfg_utils.lua" )
-dofile_once( "__MOD_ACTION_UTILS__virtual_tag.lua" )
-dofile_once( "__MOD_ACTION_UTILS__entity_uuid.lua" )
+dofile_once( "__MOD_UTILS__proj_cfg_utils.lua" )
+dofile_once( "__MOD_UTILS__virtual_tag.lua" )
+dofile_once( "__MOD_UTILS__entity_uuid.lua" )
 
 function collision_trigger( collider_id )
 	local entity_id = GetUpdatedEntityID()

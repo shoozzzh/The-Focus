@@ -1,6 +1,6 @@
 return {
 	en = {
-		action_name = "Bind",
+		action_name = "Bound",
 		action_desc = "Makes a projectile's position relative to you remain unchanged",
 	},
 	zh_cn = {

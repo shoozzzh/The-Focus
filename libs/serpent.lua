@@ -152,22 +152,22 @@ local function s(t, opts)
   return not name and body..warn or "do local "..body..sepr..tail.."return "..name..sepr.."end"
 end
 
-local function deserialize(data, opts)
-  local env = (opts and opts.safe == false) and G
-    or setmetatable({}, {
-        __index = function(t,k) return t end,
-        __call = function(t,...) error("cannot call functions") end
-      })
-  local f, res = (loadstring or load)('return '..data, nil, nil, env)
-  if not f then f, res = (loadstring or load)(data, nil, nil, env) end
-  if not f then return f, res end
-  if setfenv then setfenv(f, env) end
-  return pcall(f)
-end
+-- local function deserialize(data, opts)
+--   local env = (opts and opts.safe == false) and G
+--     or setmetatable({}, {
+--         __index = function(t,k) return t end,
+--         __call = function(t,...) error("cannot call functions") end
+--       })
+--   local f, res = (loadstring or load)('return '..data, nil, nil, env)
+--   if not f then f, res = (loadstring or load)(data, nil, nil, env) end
+--   if not f then return f, res end
+--   if setfenv then setfenv(f, env) end
+--   return pcall(f)
+-- end
 
 local function merge(a, b) if b then for k,v in pairs(b) do a[k] = v end end; return a; end
 return { _NAME = n, _COPYRIGHT = c, _DESCRIPTION = d, _VERSION = v, serialize = s,
-  load = deserialize,
+  -- load = deserialize,
   dump = function(a, opts) return s(a, merge({name = '_', compact = true, sparse = true}, opts)) end,
   line = function(a, opts) return s(a, merge({sortkeys = true, comment = true}, opts)) end,
   block = function(a, opts) return s(a, merge({indent = '  ', sortkeys = true, comment = true}, opts)) end }

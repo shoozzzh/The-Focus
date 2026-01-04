@@ -1,6 +1,6 @@
 return {
 	en = {
-		action_name = "Aim-bind",
+		action_name = "Aim-bound",
 		action_desc = "Makes a projectile keep a constant relative distance from you, rotating with your aim direction",
 	},
 	zh_cn = {

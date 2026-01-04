@@ -2,7 +2,7 @@ local injection = new_injection()
 
 injection.initializer = function()
 	dofile_once( "__MOD_LIBS__stream.lua" )
-	dofile_once( "__MOD_ACTION_UTILS__comp_utils.lua" )
+	dofile_once( "__MOD_UTILS__comp_utils.lua" )
 	-- will move these into action_utils/(some filename).lua if necessary
 	function get_held_wand()
 		if not ___held_wand_id then
@@ -36,7 +36,7 @@ injection.initializer = function()
 		if ___all_wands_in_inventory then return ___all_wands_in_inventory end
 		local inventory_quick = stream( EntityGetAllChildren( GetUpdatedEntityID() ) )
 			.filter( function( e ) return EntityGetName( e ) == "inventory_quick" end ).next()
-		if not inventory_quick then return end
+		if not inventory_quick then return {} end
 		local result = {}
 		for _, wand_id in ipairs( EntityGetAllChildren( inventory_quick, "wand" ) or {} ) do
 			table.insert( result, wand_id )
@@ -47,7 +47,7 @@ end
 
 injection._clear_deck.post = function()
 	___all_wands_in_inventory = nil
-	___held_wand_index = nil
+	___held_wand_index = -1
 	___held_wand_id = nil
 end
 
@@ -63,18 +63,21 @@ injection._add_card_to_deck.post = { 16, function( action_id )
 	local next_wand_cards = EntityGetAllChildren( next_wand, "card_action" )
 	for _, card_id in ipairs( next_wand_cards or {} ) do
 		local item_comp = EntityGetFirstComponentIncludingDisabled( card_id, "ItemComponent" )
+		if not item_comp then goto continue end
 		local item_id = ComponentGetValue2( item_comp, "mItemUid" )
 		local uses_remaining = ComponentGetValue2( item_comp, "uses_remaining" )
-		local action_id = ComponentGetValue2(
-			EntityGetFirstComponentIncludingDisabled( card_id, "ItemActionComponent" ), "action_id" )
+		local ia_comp = EntityGetFirstComponentIncludingDisabled( card_id, "ItemActionComponent" )
+		if not ia_comp then goto continue end
+		local action_id = ComponentGetValue2( ia_comp, "action_id" )
 		_add_card_to_deck( action_id, item_id, uses_remaining, true ) -- recursive
+		::continue::
 	end
 	__ACTION_ID___offset = __ACTION_ID___offset - 1
 end }
 
 injection.order_deck.post = function()
 	if not __ACTION_ID___connected then return end
-	for idx = #deck, 1 do
+	for idx = #deck, 1, -1 do
 		if deck[ idx ] and deck[ idx ].action_id == "__ACTION_ID_UPPER__" then
 			table.remove( deck, idx )
 		end

@@ -1,6 +1,6 @@
 -- tags = "___movement"
 
-dofile( "__MOD_ACTION_UTILS__movement/projectile_update.lua" )
+dofile( "__MOD_UTILS__movement/projectile_update.lua" )
 
 local entity_id = GetUpdatedEntityID()
 

@@ -1,5 +1,5 @@
-dofile_once( "__MOD_ACTION_UTILS__proj_cfg_utils.lua" )
-dofile_once( "__MOD_ACTION_UTILS__closest_aabb.lua" )
+dofile_once( "__MOD_UTILS__proj_cfg_utils.lua" )
+dofile_once( "__MOD_UTILS__closest_aabb.lua" )
 
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform( entity_id )
