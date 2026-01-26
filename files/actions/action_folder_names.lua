@@ -4,7 +4,6 @@ local action_folder_names = {
 	"camera_at_player",
 	"camera_at_projectile",
 	"if_unique",
-	"rclick_cast",
 	"sniper_shot",
 	"regular_polygon_arc",
 	"larger_projectile",
@@ -34,7 +33,7 @@ local action_folder_names = {
 	"double_shot",
 	"armament",
 	"fake_projectile_spell",
-	"actual_material_eater",
+	-- "actual_material_eater",
 }
 
 function action_folder_name_to_id( folder_name )

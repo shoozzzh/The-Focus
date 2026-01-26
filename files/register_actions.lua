@@ -1,7 +1,31 @@
+---@alias action_type integer
+
+---@class action_info
+---@field type integer?
+---@field mana integer?
+---@field price integer?
+---@field action fun( recursion_level: integer, iteration: integer )?
+---@field _and_then fun()?
+---@field _before_that fun()?
+---@field spawn_requires_flag string?
+---@field related_projectiles string[]?
+---@field related_extra_entities string[]?
+---@field spawn_level string?
+---@field spawn_probability string?
+---@field custom_xml_file string?
+---@field sprite string?
+---@field _condition (fun(): boolean)?
+---@field _spawn_prob_map table<integer, number>?
+
+---@class action_templates: action_info
 local action_templates = {}
 
+
+---@param action action_info
+---@return action_templates
 function use_templates( action )
 	setmetatable( action, { __index = action_templates } )
+	---@diagnostic disable-next-line: return-type-mismatch
 	return action
 end
 
@@ -43,18 +67,19 @@ function action_templates:decorate_action_fn()
 			draw_actions( 1, true )
 		end
 	end
-	if self._and_then ~= nil then
+	
+	local and_then = self._and_then
+	if and_then then
 		local action = self.action
 		-- the reference inside the table will be removed by remove_unnecessary_args soon, so it's not reliable
-		local and_then = self._and_then
 		self.action = function()
 			action()
 			and_then()
 		end
 	end
-	if self._before_that ~= nil then
+	local before_that = self._before_that
+	if before_that then
 		local action = self.action
-		local before_that = self._before_that
 		self.action = function()
 			before_that()
 			action()
@@ -100,6 +125,9 @@ function action_templates:template_condition()
 	self._spawn_prob_map     = self._spawn_prob_map     or { [10] = 1 }
 	self.mana                = self.mana                or 0
 	local condition = self._condition
+	if not condition then
+		condition = function() return false end
+	end
 	self.action = function( recursion_level, iteration )
 		local endpoint = -1
 		local elsepoint = -1
