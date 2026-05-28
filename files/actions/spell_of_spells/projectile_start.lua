@@ -10,9 +10,11 @@ local proj_comp = EntityGetFirstComponent(entity_id, "ProjectileComponent")
 ComponentSetValue2(proj_comp, "damage", data.damage)
 
 local x, y, r, scale_x, scale_y = EntityGetTransform(entity_id)
-local action_entity = CreateItemActionEntity(data.target_id, x, y + 9)
-EntitySetTransform(action_entity, x, y + 9, r, scale_x, scale_y)
-EntityApplyTransform(action_entity, x, y + 9, r, scale_x, scale_y)
+x = x - math.sin(r) * 9
+y = y + math.cos(r) * 9
+local action_entity = CreateItemActionEntity(data.target_id, x, y)
+EntitySetTransform(action_entity, x, y, r, scale_x, scale_y)
+EntityApplyTransform(action_entity, x, y, r, scale_x, scale_y)
 
 local allowed_comp_type = {
     SpriteComponent = true,
