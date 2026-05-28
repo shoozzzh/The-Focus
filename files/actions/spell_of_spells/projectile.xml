@@ -1,0 +1,16 @@
+<Entity cloneable="0">
+    <Base file="data/entities/base_projectile.xml">
+        <VelocityComponent gravity_y="0" />
+    </Base>
+    <ProjectileComponent
+        damage="0"
+        on_death_gfx_leave_sprite="0"
+        lifetime="600"
+        speed_min="10"
+        speed_max="10">
+    </ProjectileComponent>
+    <AudioComponent
+        file="data/audio/Desktop/projectiles.bank"
+        event_root="player_projectiles/bullet">
+    </AudioComponent>
+</Entity>

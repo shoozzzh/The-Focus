@@ -34,6 +34,7 @@ local action_folder_names = {
 	"armament",
 	"fake_projectile_spell",
 	"actual_material_eater",
+	"spell_of_spells",
 }
 
 function action_folder_name_to_id( folder_name )
