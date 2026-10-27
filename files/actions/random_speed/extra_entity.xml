@@ -1,0 +1,3 @@
+<Entity>
+    <VariableStorageComponent _tags="__ACTION_ID__" />
+</Entity>
